@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Beranda KKN</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffe4e1;
+      padding: 15px 30px;
+      font-weight: bold;
+      font-size: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      font-family: 'Libre Baskerville', serif;
+    }
+
+    .navbar-kiri {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #333;
+}
+
+.logo-img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #d2b48c;
+}
+
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropbtn {
+      background-color: #ffe4e1;
+      color: #333;
+      padding: 10px 16px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 6px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #fffafa;
+      min-width: 160px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      display: block;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ffeaea;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    body {
+      background: url('https://i.ibb.co/T2zmy2q/old-paper-texture.jpg') repeat;
+      background-size: cover;
+      font-family: 'Libre Baskerville', serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Struktur */
+    .struktur {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+     .struktur h2 {
+      font-size: 26px;
+      color: #4a2e0b;
+      text-align: center;
+      margin-top: 100px;
+      margin-bottom: 10px;
+      border-bottom: 2px dashed #bfa77f;
+      padding-bottom: 10px;
+    }
+
+    .posisi, .posisi-row {
+      margin: 20px 0;
+    }
+
+    .posisi-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .posisi img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #d2b48c;
+      cursor: pointer;
+    }
+
+    .posisi h3, .posisi p {
+      margin: 8px 0 0;
+    }
+
+    /* Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #fff;
+    }
+
+    /* Catatan */
+    .catatan {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .catatan h2 {
+      font-size: 26px;
+      color: #4a2e0b;
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 2px dashed #bfa77f;
+      padding-bottom: 10px;
+    }
+
+    .catatan-item {
+      background: rgba(255, 248, 220, 0.95);
+      border: 1px solid #d2b48c;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 40px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .catatan-item h3 {
+      color: #5a3e1b;
+      margin-top: 0;
+    }
+
+    .timestamp {
+      font-size: 14px;
+      color: #6b4f1d;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .isi ol, .isi ul {
+      padding-left: 20px;
+    }
+
+    .isi li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    #catatan::before {
+  content: "";
+  display: block;
+  height: 40px; /* ini tinggi navbar atau lebih sedikit */
+  margin-top: -120px; /* geser ke atas */
+  visibility: hidden;
+}
+    #struktur::before {
+  content: "";
+  display: block;
+  height: 40px; /* ini tinggi navbar atau lebih sedikit */
+  margin-top: -120px; /* geser ke atas */
+  visibility: hidden;
+}
+.navbar-tengah {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.navbar-tengah a {
+  color: #333;
+  font-size: 20px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar-tengah a:hover {
+  color: #d2691e;
+}
+
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-kiri">
+  <img src="img/logo.jpg" alt="Logo" class="logo-img">
+  <span>KKN Kelompok 20</span>
+</div>
+
+    <div class="navbar-tengah">
+  <a href="https://www.instagram.com/kkn.bentenghulu" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.tiktok.com/@kkn_bentenghulume?_t=ZS-8xt52nK4ZYv&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+  <a href="mailto:kknbentenghulu2025@gmail.com"><i class="fas fa-envelope"></i></a>
+</div>
+    <div class="navbar-kanan">
+      <div class="dropdown">
+        <button class="dropbtn">Menu ▼</button>
+        <div class="dropdown-content">
+          <a href="#struktur">Beranda</a>
+          <a href="#catatan">Catatan</a>
+          <a href="#keuangan">Keuangan</a>
+          <a href="#proker">Proker</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+   <div class="container" id="struktur">
+<section class="struktur">
+   <h2>Struktur Kelompok 20</h2>
+
+      <!-- Ketua -->
+      <div class="posisi">
+        <img src="img/ketua.jpg" alt="Ketua" onclick="tampilkanPopup(this.src)">
+        <h3>Putra Baruta</h3>
+        <p>Ketua</p>
+      </div>
+
+      <!-- Sekretaris (2) -->
+      <div class="posisi-row">
+        <div class="posisi">
+          <img src="img/sekre1.jpg" alt="Sekretaris 1">
+          <h3>Nama Sekre 1</h3>
+          <p>Sekretaris</p>
+        </div>
+        <div class="posisi">
+          <img src="img/sekre2.jpg" alt="Sekretaris 2">
+          <h3>Nama Sekre 2</h3>
+          <p>Sekretaris</p>
+        </div>
+      </div>
+
+      <!-- Bendahara -->
+      <div class="posisi">
+        <img src="img/bendahara.jpg" alt="Bendahara">
+        <h3>Umi Solehah</h3>
+        <p>Bendahara</p>
+      </div>
+
+      <!-- PDD (2) -->
+      <div class="posisi-row">
+        <div class="posisi">
+          <img src="img/pdd1.jpg" alt="PDD 1">
+          <h3>Nama PDD 1</h3>
+          <p>PDD</p>
+        </div>
+        <div class="posisi">
+          <img src="img/pdd2.jpg" alt="PDD 2">
+          <h3>Nama PDD 2</h3>
+          <p>PDD</p>
+        </div>
+      </div>
+
+      <!-- Perlengkapan -->
+       <div class="posisi-row">
+      <div class="posisi">
+        <img src="img/perlengkapan.jpg" alt="Perlengkapan">
+        <h3>Nama Perlengkapan</h3>
+        <p>Perlengkapan</p>
+      </div>
+      <div class="posisi">
+        <img src="img/perlengkapan.jpg" alt="Perlengkapan">
+        <h3>Nama Perlengkapan</h3>
+        <p>Perlengkapan</p>
+      </div>
+    </div>
+      <!-- Humas (2) -->
+      <div class="posisi-row">
+        <div class="posisi">
+          <img src="img/humas1.jpg" alt="Humas 1">
+          <h3>Nama Humas 1</h3>
+          <p>Humas</p>
+        </div>
+        <div class="posisi">
+          <img src="img/humas2.jpg" alt="Humas 2">
+          <h3>Nama Humas 2</h3>
+          <p>Humas</p>
+        </div>
+      </div>
+
+      <!-- Acara (2) -->
+      <div class="posisi-row">
+        <div class="posisi">
+          <img src="img/acara1.jpg" alt="Acara 1">
+          <h3>Nama Acara 1</h3>
+          <p>Acara</p>
+        </div>
+        <div class="posisi">
+          <img src="img/acara2.jpg" alt="Acara 2">
+          <h3>Nama Acara 2</h3>
+          <p>Acara</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+ <div class="container" id="catatan">
+<section class="catatan">
+  <h2>Catatan Kelompok</h2>
+
+  <div class="catatan-item"> <!-- ID dipindah ke sini -->
+    <div class="timestamp">🕒 Sabtu, 12 Juli 2025</div>
+    <div class="isi">
+      <h3>Hasil Rapat dengan DPL</h3>
+      <ol>
+        <li>Struktur kelompok ✅</li>
+        <li>Cari waktu untuk survei</li>
+        <li>
+          Pembuatan proposal (proker):
+          <ul>
+            <li>Proker utama (dipilih salah satu)</li>
+            <li>Proker bantuan</li>
+            <li>Proker perserikatan</li>
+          </ul>
+          <strong>Proker wajib:</strong> Pendidikan dan kesehatan masyarakat
+        </li>
+        <li>Adanya daftar piket di kelompok nantinya</li>
+        <li>Spanduk kelompok</li>
+        <li>Per desa nanti akan ada 2 kelompok, dari dua kelompok itu pilih satu orang menjadi koordinator untuk bicara ke camat nantinya</li>
+        <li>Perhitungkan juga biaya selama di KKN (RAB)</li>
+      </ol>
+    </div>
+  </div>
+</section>
+</div>  
+
+    <!-- Placeholder Keuangan & Proker -->
+    <section class="catatan" id="keuangan">
+      <h2>📊 Keuangan</h2>
+      <p style="text-align:center;">(Tanggung Jawab UMI)</p>
+    </section>
+
+    <section class="catatan" id="proker">
+      <h2>📌 Program Kerja</h2>
+      <p style="text-align:center;">(ComingSoon)</p>
+    </section>
+  </main>
+
+  <!-- Popup Foto -->
+  <div id="popup" class="popup" onclick="tutupPopup()">
+    <img id="popup-img" src="" alt="Foto Anggota">
+  </div>
+
+  <script>
+    function tampilkanPopup(src) {
+      document.getElementById('popup-img').src = src;
+      document.getElementById('popup').style.display = 'flex';
+    }
+
+    function tutupPopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
